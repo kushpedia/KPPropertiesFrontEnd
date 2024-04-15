@@ -1,7 +1,9 @@
 
 import axios from 'axios';
 import React from 'react';
+import getDjangoApi from '../src/utils/api-client'
 import './App.css'
+import Property from './Components/Property';
 class App extends React.Component{
   state = {details: []}
   componentDidMount(){
@@ -12,10 +14,10 @@ class App extends React.Component{
         this.setState({
           details:data
         })
-      console.log(data)
+
       }).catch(err => 
         {
-          console.log(err.mesage)
+          console.log(err.message)
         })
   }
 render(){
@@ -24,11 +26,7 @@ render(){
       <header>Data fetched from django Backend via API</header>
     <hr></hr>
     {this.state.details.map((output,id)=>(
-        <div key={id}>
-        <div>
-          <p>{output.employee}</p>
-          <p>{output.department}</p>
-          </div>  </div>
+      <Property output={output} key={id}/>
       ))}
     </div>
     )}
